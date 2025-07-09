@@ -57,4 +57,50 @@
       opacity: 0.9;
     }
   }
+
+  /* Tilt effect using CSS transform */
+  .hover-tilt {
+    transition: transform 0.3s ease;
+  }
+  .hover-tilt:hover {
+    transform: perspective(600px) rotateX(4deg) rotateY(-4deg);
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  /* Gradient text effect */
+  .text-gradient {
+    background: linear-gradient(to right, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Light/Dark Theme utility */
+  .theme-light {
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --accent: #00bcd4;
+  }
+
+  .theme-dark {
+    --bg: #000000;
+    --text: #ffffff;
+    --accent: #00ffff;
+  }
+
+  .theme-transition {
+    transition: background 0.5s ease, color 0.5s ease;
+  }
 }

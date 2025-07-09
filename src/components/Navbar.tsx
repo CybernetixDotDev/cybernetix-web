@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,22 +21,31 @@ export default function Navbar() {
           Cybernetix
         </Link>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-white focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          ☰
-        </button>
+        <div className="flex items-center gap-4">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex gap-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="hover:text-cyan-300 transition"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex gap-6">
-          {navItems.map((item) => (
-            <Link key={item.label} href={item.href} className="hover:text-cyan-300 transition">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          {/* Theme toggle */}
+          <ThemeToggle />
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden text-white focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            ☰
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -52,6 +62,8 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
+            {/* Optional: show theme toggle in mobile */}
+            <ThemeToggle />
           </div>
         </nav>
       )}
