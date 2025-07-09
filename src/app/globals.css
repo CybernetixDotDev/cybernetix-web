@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
-/* Cosmic utility: fade in animation */
+/* ------------------------------
+   Custom Tailwind Utility Layer
+-------------------------------- */
 @layer utilities {
+  /* Fade-in entrance animation */
   .animate-fade-in {
     animation: fadeIn 2s ease-out both;
-  }
-   .transition {
-    transition: all 0.3s ease;
-  }
-   .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   }
 
   @keyframes fadeIn {
@@ -22,12 +19,42 @@
       transform: translateY(0);
     }
   }
-  @keyframes slow-pan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-10px); }
-}
 
-.animate-pulse {
-  animation: slow-pan 10s ease-in-out infinite alternate;
-}
+  /* Smooth transitions for hovers, etc. */
+  .transition {
+    transition: all 0.3s ease;
+  }
+
+  /* Cyan glow for cosmic effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  /* Slow vertical panning effect */
+  .animate-pulse {
+    animation: slow-pan 10s ease-in-out infinite alternate;
+  }
+
+  @keyframes slow-pan {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Twinkling opacity effect */
+  .animate-twinkle {
+    animation: twinkle 6s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
 }
