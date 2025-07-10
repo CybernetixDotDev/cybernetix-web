@@ -46,7 +46,7 @@
 
   /* Twinkling opacity effect */
   .animate-twinkle {
-    animation: twinkle 6s ease-in-out infinite;
+    animation: twinkle 2s ease-in-out infinite;
   }
 
   @keyframes twinkle {
@@ -104,3 +104,21 @@
     transition: background 0.5s ease, color 0.5s ease;
   }
 }
+html.theme-dark {
+  --bg: #000000;
+  --text: #ffffff;
+  --accent: #00ffff;
+}
+
+html.theme-light {
+  --bg: #f8fafc;
+  --text: #1e293b;
+  --accent: #00bcd4;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+

@@ -22,9 +22,18 @@ export default function HomePage() {
       </div>
 
       {/* Twinkling Stars Overlay */}
-      <div className="absolute inset-0 -z-20 pointer-events-none">
-        <div className="w-full h-full bg-[url('/stars.png')] bg-cover opacity-60 animate-twinkle" />
-      </div>
+<div className="absolute inset-0 -z-20 pointer-events-none">
+  <div
+    className="w-full h-full opacity-60 animate-twinkle"
+    style={{
+      backgroundImage: "url('/stars.png')",
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      willChange: 'opacity',
+    }}
+  />
+</div>
 
       {/* Optional black gradient for readability */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/50 via-black/10 to-transparent" />
