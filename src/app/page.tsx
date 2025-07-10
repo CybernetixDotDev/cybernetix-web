@@ -15,7 +15,7 @@ export default function HomePage() {
       {/* Cosmic Background */}
       <div className="absolute inset-0 -z-30">
         <img
-          src="/cosmicpath.JPG"
+          src="/cosmic-bg2.png"
           alt="cosmic background"
           className="w-full h-full object-cover"
         />
