@@ -48,7 +48,6 @@ export default function Navbar() {
     recalc();
     const onResize = () => recalc();
     window.addEventListener("resize", onResize);
-    // Recalc after fonts/layout settle
     const id = setTimeout(recalc, 50);
     return () => {
       window.removeEventListener("resize", onResize);
@@ -60,7 +59,6 @@ export default function Navbar() {
   // --- Mobile menu ---
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    // Close menu when route changes
     setOpen(false);
   }, [active]);
 
@@ -95,12 +93,13 @@ export default function Navbar() {
                 <li key={l.href} className="relative">
                   <Link
                     href={l.href}
-                    ref={(node) => (itemRefs.current[l.href] = node)}
+                    // ✅ Return void, not the assigned node
+                    ref={(node) => {
+                      itemRefs.current[l.href] = node;
+                    }}
                     className={clsx(
                       "relative z-10 px-3 py-1 rounded-full text-sm transition-colors",
-                      isActive
-                        ? "text-white"
-                        : "text-zinc-300 hover:text-white"
+                      isActive ? "text-white" : "text-zinc-300 hover:text-white"
                     )}
                   >
                     {l.label}
