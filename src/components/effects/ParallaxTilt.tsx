@@ -1,14 +1,15 @@
-// src/components/effects/ParallaxTilt.tsx
 "use client";
 
 import { useRef, useEffect, useState } from "react";
 
+type TiltState = { rx: number; ry: number; tz: number };
+
 type Props = {
   children: React.ReactNode;
   className?: string;
-  maxTiltDeg?: number;     // max rotation in degrees
-  liftPx?: number;         // translateZ / translateY magnitude
-  damp?: number;           // smoothing factor
+  maxTiltDeg?: number;
+  liftPx?: number;
+  damp?: number;
 };
 
 export default function ParallaxTilt({
@@ -20,22 +21,24 @@ export default function ParallaxTilt({
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [hovered, setHovered] = useState(false);
-  const state = useRef({ rx: 0, ry: 0, tz: 0 });
+  const state = useRef<TiltState>({ rx: 0, ry: 0, tz: 0 });
 
   useEffect(() => {
-    const el = ref.current!;
+    const el = ref.current;
     if (!el) return;
 
     let raf = 0;
-    let target = { rx: 0, ry: 0, tz: 0 };
+    let target: TiltState = { rx: 0, ry: 0, tz: 0 };
 
     const onMove = (e: MouseEvent) => {
       const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;  // 0..1
-      const y = (e.clientY - r.top) / r.height;  // 0..1
-      const ry = (x - 0.5) * (maxTiltDeg * 2);   // rotateY
-      const rx = -(y - 0.5) * (maxTiltDeg * 2);  // rotateX
-      target = { rx, ry, tz: -liftPx };
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      target = {
+        ry: (x - 0.5) * (maxTiltDeg * 2),
+        rx: -(y - 0.5) * (maxTiltDeg * 2),
+        tz: -liftPx,
+      };
       setHovered(true);
     };
 
@@ -48,10 +51,7 @@ export default function ParallaxTilt({
       state.current.rx += (target.rx - state.current.rx) * damp;
       state.current.ry += (target.ry - state.current.ry) * damp;
       state.current.tz += (target.tz - state.current.tz) * damp;
-
-      el.style.transform = `perspective(900px) rotateX(${state.current.rx.toFixed(
-        2
-      )}deg) rotateY(${state.current.ry.toFixed(2)}deg) translateZ(${state.current.tz.toFixed(2)}px)`;
+      el.style.transform = `perspective(900px) rotateX(${state.current.rx.toFixed(2)}deg) rotateY(${state.current.ry.toFixed(2)}deg) translateZ(${state.current.tz.toFixed(2)}px)`;
       raf = requestAnimationFrame(tick);
     };
 
