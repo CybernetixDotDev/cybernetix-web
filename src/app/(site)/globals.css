@@ -1,0 +1,252 @@
+/* src/app/(site)/globals.css */
+
+/* Tailwind v4 */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+.prose {
+  /* base tweaks for dark UI */
+  @apply prose-headings:text-white prose-p:text-zinc-200 prose-a:underline;
+}
+.prose a { @apply text-blue-400 hover:opacity-80; }
+
+
+
+
+/* CSS variables for cosmic theme */
+:root {
+  --bg-start: 14 14 20;      /* deep space */
+  --bg-end: 2 0 24;          /* violet blue */
+  --glow: 120 94% 60%;
+  --card: 255 255 255 / 0.04;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply antialiased text-zinc-200;
+  background: radial-gradient(
+      circle at 50% -20%,
+      rgba(100, 80, 255, 0.18),
+      transparent 40%
+    ),
+    linear-gradient(to bottom, rgb(var(--bg-start)), rgb(var(--bg-end)));
+}
+
+/* Reusable container */
+.container-outer {
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Soft card */
+.card {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  @apply rounded-2xl border border-white/10;
+}
+
+/* Glow pill underline effect */
+.glow-pill {
+  @apply relative inline-block;
+}
+.glow-pill::after {
+  content: "";
+  @apply absolute left-0 right-0 -bottom-1 h-[2px] rounded-full;
+  background: linear-gradient(90deg, #00c2ff55, #7c3aed55, #00c2ff55);
+  filter: blur(1px);
+}
+
+/* Animated hamburger (simple, no libs) */
+.hamburger {
+  position: relative;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.9);
+  transition: transform .2s ease, background .2s ease;
+}
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.9);
+  transition: transform .2s ease, top .2s ease, opacity .2s ease;
+}
+.hamburger::before { top: -6px; }
+.hamburger::after { top: 6px; }
+.hamburger[data-open="true"] {
+  background: transparent;
+}
+.hamburger[data-open="true"]::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.hamburger[data-open="true"]::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+/* Minimal MDX styles without @tailwindcss/typography */
+.mdx-content {
+  line-height: 1.7;
+  color: rgb(228 228 231); /* zinc-200-ish */
+}
+
+.mdx-content h1,
+.mdx-content h2,
+.mdx-content h3,
+.mdx-content h4 {
+  color: white;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.mdx-content h1 { font-size: 2rem; }
+.mdx-content h2 { font-size: 1.5rem; }
+.mdx-content h3 { font-size: 1.25rem; }
+
+.mdx-content p { margin: 1em 0; }
+
+.mdx-content a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mdx-content ul,
+.mdx-content ol {
+  margin: 0.8em 0;
+  padding-left: 1.2em;
+}
+
+.mdx-content li { margin: 0.25em 0; }
+
+.mdx-content blockquote {
+  border-left: 3px solid rgba(255,255,255,.15);
+  padding-left: 0.9em;
+  color: rgb(161 161 170); /* zinc-400-ish */
+  margin: 1em 0;
+}
+
+.mdx-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 0.375rem;
+  padding: 0.1rem 0.35rem;
+}
+
+.mdx-content pre {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 0.5rem;
+  padding: 0.9rem;
+  overflow-x: auto;
+}
+
+.mdx-content hr {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.1);
+  margin: 2rem 0;
+}
+
+/* ——— Animated float for the logo ——— */
+@keyframes float-slow {
+  0%   { transform: translateY(2px) rotate(-12deg); }
+  50%  { transform: translateY(-6px) rotate(-12deg); }
+  100% { transform: translateY(2px) rotate(-12deg); }
+}
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* ——— Slow pulse for the rift glow ——— */
+@keyframes pulse-slow {
+  0%, 100% { opacity: .85; filter: blur(28px); }
+  50%      { opacity: 1;   filter: blur(34px); }
+}
+.animate-pulse-slow { animation: pulse-slow 5.5s ease-in-out infinite; }
+
+/* ——— Metallic inclusive gradient for H1 ———
+    Colors: trans flag (💙 #5BCEFA, 💗 #F5A9B8, 🤍 #FFFFFF) + metallic purple (#A078FF) */
+.gradient-title {
+  background-image: linear-gradient(
+    92deg,
+    #5BCEFA 0%,
+    #F5A9B8 30%,
+    #FFFFFF 55%,
+    #A078FF 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Subtle metallic sheen */
+  text-shadow: 0 0 24px rgba(160, 120, 255, 0.25);
+}
+/* Wing flap */
+@keyframes flap {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(12deg); }
+  100% { transform: rotate(0deg); }
+}
+.wing-left  { animation: flap 1.6s ease-in-out infinite; }
+.wing-right { animation: flap 1.6s ease-in-out infinite reverse; }
+
+/* Float (re-use if you already have) */
+@keyframes float-slow-0 {
+  0% { transform: translateY(2px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(2px); }
+}
+.float-slow { animation: float-slow-0 6s ease-in-out infinite; }
+
+/* Pulse glow (you likely already have something similar) */
+@keyframes pulse-slow {
+  0%,100% { opacity:.85; filter: blur(28px); }
+  50%     { opacity:1;   filter: blur(34px); }
+}
+.animate-pulse-slow { animation: pulse-slow 5.5s ease-in-out infinite; }
+
+/* Subtle float */
+@keyframes float-slow {
+  0%,100% { transform: translateY(2px); }
+  50%     { transform: translateY(-8px); }
+}
+.float-slow { animation: float-slow 8s ease-in-out infinite; }
+
+/* Wings "breathing" (very gentle) */
+@keyframes flap {
+  0%,100% { transform: scaleX(1); }
+  50%     { transform: scaleX(1.06); }
+}
+.wing-animate { animation: flap 6.5s ease-in-out infinite; transform-origin: center; }
+
+/* Hover brighten for wings */
+.group:hover .wing-glow {
+  opacity: 0.52;
+  filter: drop-shadow(0 0 20px rgba(255,200,255,.35));
+}
+
+/* Soft radiating rays behind the logo */
+.rays {
+  background: conic-gradient(
+    from 0deg,
+    rgba(160,120,255,0.18),
+    rgba(255,200,255,0.06),
+    rgba(160,120,255,0.18)
+  );
+  border-radius: 50%;
+  filter: blur(42px);
+  opacity: 0.22;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .wing-animate { animation: none !important; }
+}
+
+
