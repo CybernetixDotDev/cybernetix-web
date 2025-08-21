@@ -1,10 +1,12 @@
 // src/app/(site)/page.tsx
 import PortalHero from "@/components/hero/PortalHero";
+import MobileFirstHero from '@/components/hero/MobileFirstHero';
+import ResponsiveHero from '@/components/hero/ResponsiveHero';
 
 export default function HomePage() {
   return (
     <>
-      <PortalHero />
+      <ResponsiveHero />
       <section className="container-outer py-16">
         <div className="grid gap-6 md:grid-cols-3">
           <div className="card p-6">

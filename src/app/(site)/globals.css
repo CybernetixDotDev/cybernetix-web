@@ -14,6 +14,14 @@
 
 
 /* CSS variables for cosmic theme */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 :root {
   --bg-start: 14 14 20;      /* deep space */
   --bg-end: 2 0 24;          /* violet blue */

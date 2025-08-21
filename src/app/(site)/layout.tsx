@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MobileTabBar from '@/components/nav/MobileTabBar';
 
 export const metadata: Metadata = {
   title: "Cybernetix — The Garden",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <MobileTabBar />
         <Footer />
       </body>
     </html>
